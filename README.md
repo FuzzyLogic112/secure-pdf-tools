@@ -1,12 +1,4 @@
-这是为您定制的最终版 **SecurePDF Ultimate** 的 `README.md`。
 
-这份文档不仅包含了动态勋章，还重点突出了 **v3.0 版本的“智能格式保留”特性** 和 **无后端隐私架构**，非常适合在 GitHub 上展示。
-
-请将以下内容保存为 `README.md`。
-
----
-
-```markdown
 # 🛡️ SecurePDF Ultimate - 隐私优先的商业级文档工具
 
 <div align="center">
@@ -17,9 +9,9 @@
 ![Engine](https://img.shields.io/badge/Engine-WebAssembly-orange?style=flat-square&logo=webassembly)
 ![Status](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
 
-**全球首款 100% 浏览器端运行、支持智能排版还原的开源 PDF 工具箱**
+** 100% 浏览器端运行、支持智能排版还原的开源 PDF 工具箱**
 
-[在线演示 (Live Demo)](https://yourusername.github.io/secure-pdf-tools) · [报告 Bug](https://github.com/yourusername/secure-pdf-tools/issues) · [请求功能](https://github.com/yourusername/secure-pdf-tools/issues)
+[在线演示 (Live Demo)](https://yourusername.github.io/secure-pdf-tools) · [报告 Bug](https://github.com/FuzzyLogic112/secure-pdf-tools/issues) · [请求功能](https://github.com/FuzzyLogic112/secure-pdf-tools/issues)
 
 </div>
 
@@ -42,7 +34,8 @@
 ## 📸 界面预览 (Screenshots)
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x400?text=SecurePDF+v3.0+Dashboard" alt="Dashboard" />
+  <img width="1256" height="732" alt="image" src="https://github.com/user-attachments/assets/35315058-99cc-4b27-8545-28c3ffc119c8" />
+
   <br>
   <em>简洁专业的 UI 设计，支持拖拽上传与实时进度反馈</em>
 </div>
@@ -105,7 +98,7 @@ secure-pdf-tools/
 
 1. 克隆仓库：
 ```bash
-git clone [https://github.com/yourusername/secure-pdf-tools.git](https://github.com/yourusername/secure-pdf-tools.git)
+git clone [https://github.com/FuzzyLogic112/secure-pdf-tools]
 
 ```
 
@@ -145,9 +138,5 @@ Copyright (c) 2025 [Your Name]
 
 ```
 
-### 💡 最后一步建议：
-
-1.  **替换链接**：请务必将文档中所有的 `yourusername` 替换为你真实的 GitHub 用户名。
-2.  **上传截图**：部署好之后，截一张图命名为 `screenshot.png` 放进仓库，然后把文档里的图片链接改成 `![Dashboard](screenshot.png)`，这会让你的项目看起来非常可信。
 
 ```
