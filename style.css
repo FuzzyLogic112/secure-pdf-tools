@@ -1,0 +1,34 @@
+/* 自定义交互样式 */
+.drag-active {
+    background-color: #e0f2fe;
+    border-color: #0284c7;
+}
+
+/* 按钮激活状态 */
+.mode-btn-active {
+    background-color: #0284c7 !important;
+    color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Word 渲染容器 (离屏渲染) */
+#word-render-container {
+    width: 210mm; /* A4 宽度 */
+    min-height: 297mm;
+    background: white;
+    padding: 20mm;
+    position: absolute;
+    left: -9999px; /* 移出屏幕但保持 DOM 渲染 */
+    top: 0;
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    line-height: 1.5;
+}
+
+/* 针对 Word 解析后 HTML 的样式修正 */
+#word-render-container p { margin-bottom: 1em; }
+#word-render-container h1 { font-size: 24pt; font-weight: bold; margin-bottom: 0.5em; }
+#word-render-container h2 { font-size: 18pt; font-weight: bold; margin-bottom: 0.5em; }
+#word-render-container table { width: 100%; border-collapse: collapse; margin-bottom: 1em; }
+#word-render-container td, #word-render-container th { border: 1px solid #000; padding: 4px; }
+#word-render-container img { max-width: 100%; height: auto; }

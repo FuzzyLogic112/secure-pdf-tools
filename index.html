@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePDF Ultimate - 商业级格式保留转换</title>
+    <meta name="description" content="100% 浏览器端处理，保留格式的 PDF 转 Word，支持多格式互转。">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50:'#f0f9ff', 100:'#e0f2fe', 500:'#0ea5e9', 600:'#0284c7', 900:'#0c4a6e' }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span class="ml-2 text-xl font-bold text-slate-900">SecurePDF <span class="text-brand-600">Ultimate</span></span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full hidden sm:inline-block">v3.0 格式保留增强版</span>
+                    <a href="https://github.com/yourusername/secure-pdf-tools" target="_blank" class="text-slate-500 hover:text-brand-600 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-extrabold text-slate-900 sm:text-4xl lg:text-5xl">
+                PDF 格式无损转换
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-500">
+                支持智能识别字号、段落重组。本地运算，保护隐私。
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <button onclick="switchMode('pdf2word')" id="btn-pdf2word" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
+                📄 PDF 转 Word
+                <div class="text-xs font-normal text-slate-400 mt-1">智能保留排版</div>
+            </button>
+            <button onclick="switchMode('word2pdf')" id="btn-word2pdf" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
+                📑 Word 转 PDF
+                <div class="text-xs font-normal text-slate-400 mt-1">docx 转 pdf</div>
+            </button>
+            <button onclick="switchMode('pdf2img')" id="btn-pdf2img" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
+                🖼️ PDF 转 图片
+                <div class="text-xs font-normal text-slate-400 mt-1">高清渲染</div>
+            </button>
+            <button onclick="switchMode('img2pdf')" id="btn-img2pdf" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
+                📚 图片 转 PDF
+                <div class="text-xs font-normal text-slate-400 mt-1">合并多图</div>
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+            <div class="p-8 sm:p-12 text-center">
+                <div id="drop-zone" class="border-4 border-dashed border-slate-200 rounded-xl p-10 transition cursor-pointer hover:border-brand-500 group bg-slate-50">
+                    <div class="space-y-4">
+                        <svg class="mx-auto h-16 w-16 text-slate-400 group-hover:text-brand-500 transition" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <div class="text-lg text-slate-600">
+                            <span class="font-bold text-brand-600 hover:underline">点击选择文件</span> 或拖拽到这里
+                        </div>
+                        <p class="text-sm text-slate-400" id="limit-text">支持 PDF 文件 (最大 50MB)</p>
+                    </div>
+                    <input type="file" id="file-input" class="hidden" accept=".pdf" />
+                </div>
+
+                <div id="file-list" class="mt-8 hidden text-left">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-sm font-medium text-slate-900 uppercase tracking-wide">待处理文件</h3>
+                        <button onclick="clearFiles()" class="text-xs text-red-500 hover:text-red-700">清除所有</button>
+                    </div>
+                    <ul class="divide-y divide-slate-200 border border-slate-200 rounded-md bg-white" id="file-ul"></ul>
+                </div>
+
+                <div id="progress-container" class="mt-6 hidden">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium text-brand-600" id="progress-label">处理中...</span>
+                        <span class="text-sm font-medium text-brand-600" id="progress-text">0%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5">
+                        <div id="progress-bar" class="bg-brand-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button id="convert-btn" class="hidden w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed">开始转换</button>
+                    <a id="download-btn" class="hidden w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 shadow-lg transition cursor-pointer">下载文件</a>
+                </div>
+
+                <div id="error-msg" class="mt-6 p-4 bg-red-50 rounded-lg text-red-600 text-sm hidden border border-red-100"></div>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-xs text-slate-400">
+            <p>GDPR Compliant. 您的文件由浏览器 WebAssembly 技术在本地处理，从未发送至我们的服务器。</p>
+        </div>
+    </main>
+
+    <div id="word-render-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
