@@ -133,10 +133,3 @@ git clone [https://github.com/FuzzyLogic112/secure-pdf-tools]
 ## 📄 许可证 (License)
 
 本项目基于 MIT 许可证开源。您可以免费用于商业用途，但请保留版权声明。
-
-Copyright (c) 2025 [Your Name]
-
-```
-
-
-```
