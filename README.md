@@ -6,7 +6,7 @@
 ![Version](https://img.shields.io/badge/version-3.0.0-blue?style=flat-square&logo=git)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![Privacy](https://img.shields.io/badge/Privacy-100%25%20Local-success?style=flat-square&logo=adguard)
-![Engine](https://img.shields.io/badge/Engine-WebAssembly-orange?style=flat-square&logo=webassembly)
+![Engine](https://img.shields.io/badge/Engine-Client--Side%20JS-orange?style=flat-square&logo=javascript)
 ![Status](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
 
 ** 100% 浏览器端运行、支持智能排版还原的开源 PDF 工具箱**
@@ -19,7 +19,7 @@
 
 ## 📖 项目简介 (Introduction)
 
-**SecurePDF Ultimate** 是一个突破性的纯前端 SaaS 解决方案。针对传统 PDF 工具（如 SmallPDF）必须上传文件带来的隐私泄露风险，本项目利用 **WebAssembly** 和 **Modern Web APIs**，实现了所有转换逻辑在用户浏览器内存中闭环运行。
+**SecurePDF Ultimate** 是一个突破性的纯前端 SaaS 解决方案。针对传统 PDF 工具（如 SmallPDF）必须上传文件带来的隐私泄露风险，本项目利用 **PDF.js / SheetJS 等纯前端库** 和 **Modern Web APIs**，实现了所有转换逻辑在用户浏览器内存中闭环运行。
 
 **v3.0 版本重大更新：** 引入了全新的「智能排版重组算法」，在 PDF 转 Word 时不再是简单的提取文字，而是能够识别字号大小、加粗样式，并智能合并段落，提供接近原生文档的编辑体验。
 
@@ -120,7 +120,7 @@ git clone [https://github.com/FuzzyLogic112/secure-pdf-tools]
 本应用严格遵守「数据最小化」原则：
 
 1. **不收集数据**：我们不使用 Cookie 跟踪您的行为，也不收集任何个人信息。
-2. **不传输文件**：所有转换逻辑均在 WebWorker 线程中执行，网络请求仅用于下载静态 JS 库。
+2. **不传输文件**：所有转换逻辑均在浏览器本地执行（PDF 解析跑在 PDF.js 的 Web Worker 里），网络请求仅用于从 CDN 下载静态 JS 库。
 3. **无第三方访问**：除了基础的 CDN 资源加载，不存在任何数据回传接口。
 
 ---
