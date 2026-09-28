@@ -50,6 +50,10 @@
 | **📑 Word 转 PDF** | `mammoth.js` + `html2pdf` | **行业难点突破**：在无后端环境下，通过离线渲染引擎实现 docx 到 pdf 的转换。 |
 | **🖼️ PDF 转 图片** | `Canvas Rendering` | 高清渲染，支持批量导出，自动打包为 ZIP 下载。 |
 | **📚 图片 转 PDF** | `jsPDF` | 智能适配 A4 纸张，支持拖拽排序，快速合并扫描件。 |
+| **📊 Excel 转 PDF** | `SheetJS` + `html2pdf` | 横向 A4 输出，**工作簿内每个工作表单独分页**，带表名标题。 |
+| **🧾 PDF 转 Excel** | `PDF.js` 坐标还原 | 按文本块的 X / Y 坐标还原行列，导出带 BOM 头的 CSV，Excel 打开不乱码。 |
+
+> 说明：Word / Excel 转 PDF 走的是「渲染成图片再放进 PDF」的路线，输出的 PDF 里文字**不可选中、不可检索**。PDF 转 Word / Excel 依赖 PDF 自带的文字层，扫描件需要先做 OCR。
 
 ---
 
@@ -62,6 +66,7 @@
 * **文档生成**: [docx](https://docx.js.org/) & [jsPDF](https://github.com/parallax/jsPDF)
 * **Word 解析**: [Mammoth.js](https://github.com/mwilliamson/mammoth.js)
 * **渲染引擎**: [html2pdf.js](https://github.com/eKoopmans/html2pdf.js)
+* **表格处理**: [SheetJS](https://sheetjs.com/)
 * **打包工具**: [JSZip](https://stuk.github.io/jszip/)
 
 ---

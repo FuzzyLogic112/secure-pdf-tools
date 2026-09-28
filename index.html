@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecurePDF Ultimate - 商业级格式保留转换</title>
-    <meta name="description" content="100% 浏览器端处理，保留格式的 PDF 转 Word，支持多格式互转。">
+    <meta name="description" content="100% 浏览器端处理，保留格式的 PDF 转 Word，支持 Excel 与 PDF、图片多格式互转。">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -28,6 +28,7 @@
     <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
@@ -55,11 +56,11 @@
                 PDF 格式无损转换
             </h1>
             <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-500">
-                支持智能识别字号、段落重组。本地运算，保护隐私。
+                支持智能识别字号、段落重组，以及 Excel 表格互转。本地运算，保护隐私。
             </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <button onclick="switchMode('pdf2word')" id="btn-pdf2word" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
                 📄 PDF 转 Word
                 <div class="text-xs font-normal text-slate-400 mt-1">智能保留排版</div>
@@ -75,6 +76,14 @@
             <button onclick="switchMode('img2pdf')" id="btn-img2pdf" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
                 📚 图片 转 PDF
                 <div class="text-xs font-normal text-slate-400 mt-1">合并多图</div>
+            </button>
+            <button onclick="switchMode('excel2pdf')" id="btn-excel2pdf" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
+                📊 Excel 转 PDF
+                <div class="text-xs font-normal text-slate-400 mt-1">多工作表逐页输出</div>
+            </button>
+            <button onclick="switchMode('pdf2excel')" id="btn-pdf2excel" class="mode-btn py-3 px-4 rounded-xl font-medium bg-white text-slate-600 shadow border border-slate-100 transition">
+                🧾 PDF 转 Excel
+                <div class="text-xs font-normal text-slate-400 mt-1">按坐标还原表格</div>
             </button>
         </div>
 
@@ -123,8 +132,6 @@
             <p>GDPR Compliant. 您的文件由浏览器 WebAssembly 技术在本地处理，从未发送至我们的服务器。</p>
         </div>
     </main>
-
-    <div id="word-render-container"></div>
 
     <script src="script.js"></script>
 </body>
